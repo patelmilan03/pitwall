@@ -1,0 +1,26 @@
+[project]
+name = "pitwall"
+version = "0.1.0"
+description = "OpenF1 → S3 lake → Postgres warehouse → Streamlit data-engineering pipeline."
+requires-python = ">=3.12"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+# pycodestyle errors/warnings, pyflakes, isort, pyupgrade, flake8-bugbear.
+select = ["E", "F", "I", "W", "UP", "B"]
+
+[tool.pytest.ini_options]
+# src/ layout: make `import pitwall` work without an editable install.
+pythonpath = ["src"]
+testpaths = ["tests"]
