@@ -25,7 +25,7 @@
 ### 0.4 Local environment (Windows)
 ```powershell
 cd "C:\Milan\Code\resume projects\pitwall"
-py -3.12 -m venv .venv
+py -3.13 -m venv .venv    # 3.13 is the machine's interpreter; the full pinned stack was verified on 3.13.1 (2026-07-11). No 3.12 install needed.
 .venv\Scripts\activate
 pip install httpx boto3 pandas pandera pyarrow prefect sqlalchemy psycopg2-binary openpyxl python-dotenv
 pip install pytest respx ruff   # dev deps
@@ -121,7 +121,7 @@ One xlsx per session via `pd.ExcelWriter(engine="openpyxl")`: sheets = Results (
 ### 3.2 `.github/workflows/pipeline.yml`
 Structure (write it yourself; every block is a learning point):
 - `on:` → `schedule: [cron: "0 6 * * *"]` + `workflow_dispatch:` with inputs `season` (string, optional) and `meeting_key` (optional).
-- One job: checkout → `actions/setup-python` (3.12, `cache: pip`) → `pip install -r requirements.txt` → `python -m pitwall.flows` with `env:` mapping the 5 secrets (`${{ secrets.NAME }}`) + `ENV_PREFIX: prod` + dispatch inputs as env vars.
+- One job: checkout → `actions/setup-python` (**3.13**, matching local — `cache: pip`) → `pip install -r requirements.txt` → `python -m pitwall.flows` with `env:` mapping the 5 secrets (`${{ secrets.NAME }}`) + `PITWALL_ENV: prod` + dispatch inputs as env vars.
 - Failure alert step: `if: failure()` → `uses: actions/github-script` (or `gh issue create` with `GH_TOKEN: ${{ github.token }}`) opening an issue labelled `pipeline-failure`.
 
 ### 3.3 Backfill & burn-in

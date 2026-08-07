@@ -1,4 +1,4 @@
-# PitWall runtime dependencies (pinned — Python 3.12).
+# PitWall runtime dependencies (pinned; floor Python 3.12, local+CI run 3.13 — full set verified on 3.13.1, 2026-07-11).
 # Provider-neutral: storage is any S3-compatible endpoint (Backblaze B2 today).
 
 # Extraction
